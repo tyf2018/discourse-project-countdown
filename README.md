@@ -33,9 +33,10 @@
 1. 将此插件上传到您的GitHub仓库
 2. 在Discourse管理后台，进入 **管理 → 插件**
 3. 点击"安装插件"，输入您的GitHub仓库地址：
-   ```
+```
 https://github.com/tyf2018/discourse-project-countdown
-   ```
+```
+
 4. 点击"安装"并等待安装完成
 5. 重启Discourse实例
 
@@ -176,3 +177,4 @@ discourse-project-countdown/
 
 
 **Made with ❤️ for Discourse Community**
+
