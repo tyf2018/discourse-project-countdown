@@ -3,7 +3,7 @@
 # name: discourse-project-countdown
 # about: 项目倒计时管理工具，帮助用户跟踪项目截止日期
 # version: 1.1.0
-# authors: Your Name
+# authors: TaoYunFeng
 # url: https://github.com/tyf2018/discourse-project-countdown
 # required_version: 3.0.0
 
