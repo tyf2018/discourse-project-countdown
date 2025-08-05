@@ -1,0 +1,46 @@
+en:
+  js:
+    project_countdown:
+      title: "Project Countdown"
+      add_project: "Add Project"
+      edit_project: "Edit Project"
+      save_project: "Save"
+      cancel_edit: "Cancel"
+      delete_project: "Delete"
+      project_name_placeholder: "Project Name"
+      deadline_label: "Deadline"
+      important_label: "Important"
+      filter_placeholder: "Filter... Use spaces to separate keywords"
+      filter_important_only: "Show important projects only"
+      no_projects: "No projects yet. Please add a new project."
+      no_important_projects: "No important projects yet. Please add important projects."
+      no_filtered_projects: "No matching projects found"
+      loading: "Loading..."
+      save_success: "Saved successfully"
+      save_error: "Failed to save"
+      delete_confirm: "Are you sure you want to delete this project?"
+      expired_projects: "Expired Projects"
+      status:
+        normal: "Normal"
+        attention: "Attention"
+        warning: "Warning"
+        urgent: "Urgent"
+        expired: "Expired"
+      sort:
+        by_days_left: "By Days Left"
+        by_name_asc: "Name A-Z"
+        by_name_desc: "Name Z-A"
+        by_date_asc: "Date Ascending"
+        by_date_desc: "Date Descending"
+      days_left:
+        today: "Due Today"
+        expired_days: "Overdue by %{days} days"
+        remaining_days: "%{days} days left"
+      validation:
+        name_required: "Please enter project name"
+        deadline_required: "Please select deadline"
+        max_projects_reached: "Maximum number of projects reached"
+    admin:
+      project_countdown:
+        title: "Project Countdown Settings"
+        settings: "Settings"

@@ -1,0 +1,199 @@
+{{!-- 项目倒计时组件模板 --}}
+<div class="project-countdown-container">
+  {{!-- 标题栏和筛选框 --}}
+  <div class="project-countdown-header">
+    <div class="title-section">
+      <h4 class="countdown-title" data-sort-title="true" {{action "toggleSortMenu"}}>
+        {{i18n "project_countdown.title"}} {{moment-format (now) "YYYY-MM-DD"}}
+        <span class="sort-arrow {{if showSortMenu 'rotated'}}">▼</span>
+      </h4>
+
+      {{!-- 排序下拉菜单 --}}
+      {{#if showSortMenu}}
+        <div class="sort-dropdown" data-sort-menu="true">
+          {{#each sortOptions as |option|}}
+            <div class="sort-option {{if (eq sortType option.key) 'active'}}"
+                 {{action "setSortType" option.key}}>
+              {{i18n option.label}}
+            </div>
+          {{/each}}
+        </div>
+      {{/if}}
+    </div>
+
+    {{!-- 筛选框和关注项目筛选 --}}
+    <div class="filter-section">
+      {{input
+        type="text"
+        value=filterText
+        placeholder=(i18n "project_countdown.filter_placeholder")
+        class="filter-input"
+        input=(action "updateFilterText")
+      }}
+
+      <label class="important-filter">
+        {{input
+          type="checkbox"
+          checked=showImportantOnly
+          change=(action "updateShowImportantOnly")
+        }}
+        {{i18n "project_countdown.filter_important_only"}}
+      </label>
+    </div>
+  </div>
+
+  {{!-- 添加项目表单 --}}
+  <div class="add-project-form">
+    {{input
+      type="text"
+      value=newProject.name
+      placeholder=(i18n "project_countdown.project_name_placeholder")
+      class="project-name-input"
+      input=(action "updateNewProjectName")
+    }}
+
+    {{input
+      type="date"
+      value=newProject.deadline
+      class="date-input"
+      input=(action "updateNewProjectDeadline")
+    }}
+
+    <label class="important-checkbox">
+      {{input
+        type="checkbox"
+        checked=newProject.isImportant
+        change=(action "updateNewProjectImportant")
+      }}
+      {{i18n "project_countdown.important_label"}}
+    </label>
+
+    <button class="btn btn-primary add-btn" {{action (if editMode "saveEdit" "addProject")}}>
+      {{i18n (if editMode "project_countdown.save_project" "project_countdown.add_project")}}
+    </button>
+
+    {{#if editMode}}
+      <button class="btn btn-default cancel-btn" {{action "cancelEdit"}}>
+        {{i18n "project_countdown.cancel_edit"}}
+      </button>
+    {{/if}}
+  </div>
+
+  {{!-- 内容区域 --}}
+  {{#if loading}}
+    <div class="loading-message">
+      {{i18n "project_countdown.loading"}}
+    </div>
+  {{else}}
+    {{!-- 活跃项目列表 --}}
+    {{#if activeProjects.length}}
+      <div class="projects-grid active-projects">
+        {{#each activeProjects as |project index|}}
+          {{#with (calculate-days-left project.deadline) as |daysLeft|}}
+            <div class="project-card" style="border-left-color: {{get-status-color daysLeft}}">
+              <div class="project-content">
+                <div class="project-header">
+                  <span class="project-name">{{project.name}}</span>
+
+                  {{#if project.isImportant}}
+                    <span class="important-badge">{{i18n "project_countdown.important_label"}}</span>
+                  {{/if}}
+
+                  <span class="status-badge" style="background-color: {{get-status-color daysLeft}}">
+                    {{get-status-label daysLeft}}
+                  </span>
+                </div>
+
+                <div class="project-footer">
+                  <span class="deadline">
+                    {{i18n "project_countdown.deadline_label"}}: {{project.deadline}}
+                  </span>
+
+                  <div class="project-actions">
+                    <span class="days-left" style="color: {{get-status-color daysLeft}}">
+                      {{#if (eq daysLeft 0)}}
+                        {{i18n "project_countdown.days_left.today"}} ❗❗
+                      {{else}}
+                        {{i18n "project_countdown.days_left.remaining_days" days=daysLeft}}
+                      {{/if}}
+                    </span>
+
+                    <div class="action-buttons">
+                      <button class="btn-flat edit-btn" {{action "startEdit" (find-project-index projects project)}}>
+                        {{i18n "project_countdown.edit_project"}}
+                      </button>
+
+                      <button class="btn-flat delete-btn" {{action "deleteProject" (find-project-index projects project)}}>
+                        {{i18n "project_countdown.delete_project"}}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {{/with}}
+        {{/each}}
+      </div>
+    {{else}}
+      <div class="no-projects-message">
+        {{noProjectsMessage}}
+      </div>
+    {{/if}}
+
+    {{!-- 已过期项目列表 --}}
+    {{#if expiredProjects.length}}
+      <div class="expired-section">
+        <h6 class="expired-title">{{i18n "project_countdown.expired_projects"}}</h6>
+
+        <div class="projects-grid expired-projects">
+          {{#each expiredProjects as |project index|}}
+            {{#with (calculate-days-left project.deadline) as |daysLeft|}}
+              <div class="project-card expired">
+                <div class="project-content">
+                  <div class="project-header">
+                    <span class="project-name">{{project.name}}</span>
+
+                    {{#if project.isImportant}}
+                      <span class="important-badge">{{i18n "project_countdown.important_label"}}</span>
+                    {{/if}}
+
+                    <span class="status-badge expired">
+                      {{i18n "project_countdown.status.expired"}}
+                    </span>
+                  </div>
+
+                  <div class="project-footer">
+                    <span class="deadline">
+                      {{i18n "project_countdown.deadline_label"}}: {{project.deadline}}
+                    </span>
+
+                    <div class="project-actions">
+                      <span class="days-left expired">
+                        {{i18n "project_countdown.days_left.expired_days" days=(abs daysLeft)}}
+                      </span>
+
+                      <div class="action-buttons">
+                        <button class="btn-flat edit-btn" {{action "startEdit" (find-project-index projects project)}}>
+                          {{i18n "project_countdown.edit_project"}}
+                        </button>
+
+                        <button class="btn-flat delete-btn" {{action "deleteProject" (find-project-index projects project)}}>
+                          {{i18n "project_countdown.delete_project"}}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {{/with}}
+          {{/each}}
+        </div>
+      </div>
+    {{/if}}
+  {{/if}}
+
+  {{!-- 页脚信息 --}}
+  <div class="countdown-footer">
+    项目倒计时 v1.7.0 - Discourse版
+  </div>
+</div>
