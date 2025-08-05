@@ -1,0 +1,46 @@
+zh_CN:
+  js:
+    project_countdown:
+      title: "项目倒计时"
+      add_project: "添加项目"
+      edit_project: "编辑项目"
+      save_project: "保存"
+      cancel_edit: "取消"
+      delete_project: "删除"
+      project_name_placeholder: "项目名称"
+      deadline_label: "截止日期"
+      important_label: "关注"
+      filter_placeholder: "筛选 多关键词用空格隔开..."
+      filter_important_only: "仅显示关注项目"
+      no_projects: "暂无项目，请添加新项目"
+      no_important_projects: "暂无关注项目，请添加新的关注项目"
+      no_filtered_projects: "没有找到匹配的项目"
+      loading: "加载中..."
+      save_success: "已保存"
+      save_error: "保存失败"
+      delete_confirm: "确定要删除这个项目吗？"
+      expired_projects: "已过期项目"
+      status:
+        normal: "正常"
+        attention: "注意"
+        warning: "警告"
+        urgent: "紧急"
+        expired: "已过期"
+      sort:
+        by_days_left: "按剩余天数"
+        by_name_asc: "项目名升序"
+        by_name_desc: "项目名降序"
+        by_date_asc: "截止日期升序"
+        by_date_desc: "截止日期降序"
+      days_left:
+        today: "今天截止"
+        expired_days: "已过期 %{days} 天"
+        remaining_days: "剩 %{days} 天"
+      validation:
+        name_required: "请输入项目名称"
+        deadline_required: "请选择截止日期"
+        max_projects_reached: "已达到最大项目数量限制"
+    admin:
+      project_countdown:
+        title: "项目倒计时设置"
+        settings: "设置"
