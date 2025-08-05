@@ -25,6 +25,10 @@ after_initialize do
     object.project_countdown_data
   end
 
+  # 定义模块
+  module ::ProjectCountdown
+  end
+
   # API端点来处理项目数据
   Discourse::Application.routes.append do
     namespace :project_countdown, path: '/project-countdown' do
