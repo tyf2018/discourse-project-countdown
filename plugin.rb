@@ -10,11 +10,6 @@
 enabled_site_setting :project_countdown_enabled
 
 after_initialize do
-  # 注册项目倒计时组件
-  register_html_builder('project-countdown') do |theme|
-    "window.ProjectCountdownEnabled = true;"
-  end
-
   # 添加用户自定义字段来存储项目数据
   add_to_class(:user, :project_countdown_data) do
     custom_fields['project_countdown_data']
@@ -76,9 +71,6 @@ after_initialize do
     end
   end
 
-  # 添加站点设置
-  add_admin_route 'project_countdown.title', 'project-countdown'
-
   # 权限检查
   Guardian.class_eval do
     def can_use_project_countdown?
@@ -88,6 +80,4 @@ after_initialize do
   end
 end
 
-# CSS和JS资源
-register_asset "stylesheets/project-countdown.scss"
-register_asset "javascripts/discourse/initializers/project-countdown.js"
+# 资源文件会自动加载，无需手动注册
