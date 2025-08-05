@@ -1,0 +1,31 @@
+{
+  "name": "discourse-project-countdown",
+  "version": "1.0.0",
+  "description": "项目倒计时管理工具 - Discourse插件版本",
+  "keywords": [
+    "discourse",
+    "plugin",
+    "project",
+    "countdown",
+    "管理",
+    "倒计时"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/discourse-project-countdown.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/discourse-project-countdown/issues"
+  },
+  "homepage": "https://github.com/your-username/discourse-project-countdown#readme",
+  "engines": {
+    "discourse": ">=3.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
