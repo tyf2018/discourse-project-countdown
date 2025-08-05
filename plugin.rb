@@ -7,8 +7,6 @@
 # url: https://github.com/your-username/discourse-project-countdown
 # required_version: 3.0.0
 
-gem 'json', '>= 2.0'
-
 enabled_site_setting :project_countdown_enabled
 
 after_initialize do
@@ -89,9 +87,6 @@ after_initialize do
     end
   end
 end
-
-# 站点设置
-register_site_setting_type :project_countdown_setting, ->(val) { val.is_a?(String) }
 
 # CSS和JS资源
 register_asset "stylesheets/project-countdown.scss"

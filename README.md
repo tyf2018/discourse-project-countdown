@@ -36,7 +36,6 @@
 ```
 https://github.com/tyf2018/discourse-project-countdown
 ```
-
 4. 点击"安装"并等待安装完成
 5. 重启Discourse实例
 
@@ -175,6 +174,4 @@ discourse-project-countdown/
 
 ---
 
-
 **Made with ❤️ for Discourse Community**
-
